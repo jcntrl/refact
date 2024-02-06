@@ -53,7 +53,7 @@ class ModelAssigner:
             if assignment["gpus_shard"] not in [1, 2, 4]:
                 log(f"invalid shard count {assignment['gpus_shard']}, skipping '{model_name}'")
                 continue
-            if self.models_db[model_name]["backend"] not in ["transformers"] and assignment["gpus_shard"] > 1:
+            if self.models_db[model_name]["backend"] not in ["transformers", "autogptq"] and assignment["gpus_shard"] > 1:
                 log(f"sharding not supported for '{self.models_db['backend']}' backend, skipping '{model_name}'")
                 continue
             if assignment.get("share_gpu", False):
@@ -208,7 +208,7 @@ class ModelAssigner:
                 "has_finetune": bool("finetune" in rec["filter_caps"]),
                 "has_toolbox": bool(toolbox_caps.intersection(rec["filter_caps"])),
                 "has_chat": bool("chat" in rec["filter_caps"]),
-                "has_sharding": rec["backend"] in ["transformers"],
+                "has_sharding": rec["backend"] in ["transformers", "autogptq"],
             })
         return {"models": info}
 

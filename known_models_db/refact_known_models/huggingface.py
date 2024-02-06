@@ -192,6 +192,16 @@ huggingface_mini_db = {
         "T": 4096,  # in fact this model allows 8k context, but we have 4k context at max in hf inference
         "filter_caps": ["chat"],
     },
+    "mixtral/8x7b/instruct-v0.1-GPTQ": {
+        "backend": "autogptq",
+        "model_path": "TheBloke/Mixtral-8x7B-Instruct-v0.1-GPTQ",
+        "diff_scratchpad_class": None,
+        "chat_scratchpad_class": None,
+        "model_class_kwargs": {},
+        "required_memory_mb": 25000, # the model weights on hf are 23.8 GB
+        "T": 4096,  # in fact this model allows 8k context, but we have 4k context at max in hf inference
+        "filter_caps": ["chat"],
+    },
     "phind/34b/v2": {
         "backend": "transformers",
         "model_path": "Phind/Phind-CodeLlama-34B-v2",
